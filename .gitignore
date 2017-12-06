@@ -3,4 +3,5 @@
 
 **/.vagrant
 
+/venv
 /web-api-auth-examples
