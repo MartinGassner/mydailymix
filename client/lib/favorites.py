@@ -4,9 +4,8 @@ from utils import buildQuery
 rootParams = {
     "endpoint": "",
     "token": None,
-    "payload": {
-        "timeRange": None,
-        "limit": 10
+    "params": {
+        "limit": 20
     }
 }
 
@@ -15,5 +14,5 @@ def getFavs(token, type):
     queryParams["endpoint"] = ("/me/top/" + type)
     queryParams["token"] = token
     query = buildQuery(queryParams)
-    res = requests.get(url=query["url"], headers=query["header"], data=query["payload"])
+    res = requests.get(url=query["url"], headers=query["header"])
     return json.loads(res.text)

@@ -6,3 +6,11 @@ def genres(items):
             if not genre in filteredGenres:
                 filteredGenres.append(genre)
     return filteredGenres
+
+def tracks(items):
+    filteredTracks = []
+    for item in items:
+        for id in item["id"]:
+            if not id in filteredTracks:
+                filteredTracks.append(id)
+    return filteredTracks

@@ -4,22 +4,27 @@ def setHeader(token):
     header = {"Authorization": "Bearer %s" % token, "Content-Type": "application/json"}
     return header
 
-def setUrl(endpoint):
-    return baseUrl + endpoint
+def setUrl(queryParams):
+    url = baseUrl + queryParams["endpoint"]
+    if "params" in queryParams:
+        url += "?"
+        for i, (pk, pv) in enumerate(queryParams["params"].iteritems()):
+            if i != 0:
+                url += "&"
+            url += pk + "=" + str(pv)
+    return url
 
 def setPayload(payload):
     data = {}
-    if "limit" in payload:
-        data["limit"] = payload["limit"]
-    if "timeRange" in payload:
-        data["time_range"] = payload["timeRange"]
     if "uris" in payload:
         data["uris"] = payload["uris"]
     return data
 
-def buildQuery(params):
-    return {
-        "header": setHeader(params["token"]),
-        "url": setUrl(params["endpoint"]),
-        "payload": setPayload(params["payload"])
+def buildQuery(queryParams):
+    query = {
+        "header": setHeader(queryParams["token"]),
+        "url": setUrl(queryParams)
     }
+    if "payload" in queryParams:
+        query["payload"] = setPayload(queryParams["payload"])
+    return query

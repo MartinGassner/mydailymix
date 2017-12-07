@@ -3,8 +3,7 @@ from utils import buildQuery
 
 rootParams = {
     "endpoint": "",
-    "token": None,
-    "payload": {}
+    "token": None
 }
 
 def topTracks(token, id):
@@ -12,5 +11,5 @@ def topTracks(token, id):
     queryParams["endpoint"] = "/artists/" + id + "/top-tracks?country=DE"
     queryParams["token"] = token
     query = buildQuery(queryParams)
-    res = requests.get(url=query["url"], headers=query["header"], data=query["payload"])
+    res = requests.get(url=query["url"], headers=query["header"])
     return json.loads(res.text)

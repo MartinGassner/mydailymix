@@ -4,7 +4,11 @@ from utils import buildQuery
 rootParams = {
     "endpoint": "",
     "token": None,
-    "payload": {}
+    "payload": {},
+    "params": {
+        "type": None,
+        "q": None
+    }
 }
 
 def getSearchQuery(searchList):
@@ -14,8 +18,9 @@ def by(token, type, searchList):
     queryParams = rootParams.copy()
     res = []
     for i in xrange(20):
-        searchQuery = getSearchQuery(searchList)
-        queryParams["endpoint"] = ("/search?type=" + type + "&q=" + searchQuery)
+        queryParams["params"]["q"] = getSearchQuery(searchList)
+        queryParams["params"]["type"] = type
+        queryParams["endpoint"] = "/search"
         queryParams["token"] = token
         query = buildQuery(queryParams)
         response = requests.get(url=query["url"], headers=query["header"])

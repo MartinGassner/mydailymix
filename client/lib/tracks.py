@@ -1,19 +1,26 @@
-import requests, json
+import requests, json, random
 from utils import buildQuery
 
 rootParams = {
     "endpoint": "",
     "token": None,
-    "payload": {
-        "timeRange": None,
+    "params": {
         "limit": 10
     }
 }
 
-def getFavs(token):
+def getRandTracks(topTracks):
+    seedTracks = []
+    for j in xrange(3):
+        seedTracks = random.choice(topTracks)
+    return seedTracks
+
+def getRelated(token, topTracks):
     queryParams = rootParams.copy()
-    queryParams["endpoint"] = "/me/top/tracks"
     queryParams["token"] = token
-    query = buildQuery(queryParams)
-    res = requests.get(url=query["url"], headers=query["header"], data=query["payload"])
-    return json.loads(res.text)
+    queryParams["endpoint"] = "/recommendations"
+    for i in xrange(5):
+        queryParams["payload"]["seed_tracks"] = getRandTracks(topTracks)
+        query = buildQuery(queryParams)
+        res = requests.get(url=query["url"], headers=query["header"])
+        return json.loads(res.text)
