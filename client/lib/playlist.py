@@ -14,16 +14,10 @@ rootParams = {
     }
 }
 
-def setUris(items):
-    uriList = []
-    for item in iter(items):
-        uriList.append(item['uri'])
-    return uriList
-
-def replaceTracks(token, tracks):
+def replaceTracks(token, trackUris):
     queryParams = rootParams.copy()
     queryParams["endpoint"] = ("/users/" + userID + "/playlists/" + playlistID + "/tracks")
     queryParams["token"] = token
-    queryParams["payload"]["uris"] = setUris(tracks["items"])
+    queryParams["payload"]["uris"] = trackUris
     query = buildQuery(queryParams)
     requests.put(url=query["url"], headers=query["header"], data=json.dumps(query["payload"]))

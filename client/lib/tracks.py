@@ -5,22 +5,29 @@ rootParams = {
     "endpoint": "",
     "token": None,
     "params": {
-        "limit": 10
+        "limit": 30
     }
 }
 
 def getRandTracks(topTracks):
-    seedTracks = []
+    seedTracks = ""
     for j in xrange(3):
-        seedTracks = random.choice(topTracks)
+        if j != 0:
+            seedTracks += ","
+        seedTracks += random.choice(topTracks)
     return seedTracks
 
 def getRelated(token, topTracks):
     queryParams = rootParams.copy()
     queryParams["token"] = token
     queryParams["endpoint"] = "/recommendations"
+    relatedTracks = []
     for i in xrange(5):
-        queryParams["payload"]["seed_tracks"] = getRandTracks(topTracks)
+        queryParams["params"]["seed_tracks"] = getRandTracks(topTracks)
         query = buildQuery(queryParams)
         res = requests.get(url=query["url"], headers=query["header"])
-        return json.loads(res.text)
+        resJson = json.loads(res.text)
+        for i, track in enumerate(resJson["tracks"]):
+            if i < 3 and not track["uri"] in relatedTracks:
+                relatedTracks.append(track["uri"])
+    return relatedTracks
