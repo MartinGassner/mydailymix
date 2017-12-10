@@ -28,3 +28,4 @@ def buildQuery(queryParams):
     if "payload" in queryParams:
         query["payload"] = setPayload(queryParams["payload"])
     return query
+
