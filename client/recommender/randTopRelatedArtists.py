@@ -1,4 +1,4 @@
-from lib import searchItems, filterItems, artists
+from lib import searchItems, artists
 
 def find(accessToken, topGenres):
     randRelatedArtists = searchItems.by(accessToken, "artist", topGenres)

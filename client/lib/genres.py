@@ -7,6 +7,23 @@ rootParams = {
     "token": None
 }
 
+excludedGenres = [
+    "reading",
+    "hoerspiel",
+    "motivation",
+    "poetry",
+    "prank",
+    "kabarett",
+    "drama",
+    "oratory",
+    "spoken word",
+    "kindermusik",
+    "guidance",
+    "deep comedy",
+    "comedy",
+    "comic"
+]
+
 def getGenreWhitelist(token):
     queryParams = rootParams.copy()
     queryParams["token"] = token
@@ -19,13 +36,13 @@ def getTopWhiteGenres(topArtists, whiteListGenres):
     topWhiteListGernres = []
     filteredGenres = filterItems.genres(topArtists["items"])
     for whiteListGenre in whiteListGenres["genres"]:
-        if whiteListGenre in filteredGenres:
+        if whiteListGenre in filteredGenres and not whiteListGenre in excludedGenres:
             topWhiteListGernres.append(whiteListGenre)
     return topWhiteListGernres
 
 def getTopFilteredGenres(topArtists, whiteListGenres):
     filteredGenres = filterItems.genres(topArtists["items"])
     for filteredGenre in filteredGenres:
-        if filteredGenre in whiteListGenres["genres"]:
+        if filteredGenre in whiteListGenres["genres"] and filteredGenre in excludedGenres:
             filteredGenres.remove(filteredGenre)
     return filteredGenres
