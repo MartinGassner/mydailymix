@@ -5,5 +5,8 @@ def find(accessToken, topGenres):
     topTracks = []
     for artist in randRelatedArtists:
         topArtistTracks = artists.topTracks(accessToken, artist["id"])
-        topTracks.append(topArtistTracks["tracks"][0]["uri"])
+        try:
+            topTracks.append(topArtistTracks["tracks"][0]["uri"])
+        except:
+            continue
     return topTracks

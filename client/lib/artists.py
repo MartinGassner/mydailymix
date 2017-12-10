@@ -40,13 +40,16 @@ def getRelated(token, topArtists, topWhiteListGenres):
     queryParams["token"] = token
     queryParams["endpoint"] = "/recommendations"
     relatedArtists = []
-    for i in xrange(5):
+    for i in xrange(4):
         queryParams["params"]["seed_artists"] = getRandArtists(topArtists)
         queryParams["params"]["seed_genres"] = getRandGenres(topWhiteListGenres)
         query = buildQuery(queryParams)
         res = requests.get(url=query["url"], headers=query["header"])
         resJson = json.loads(res.text)
         for i, track in enumerate(resJson["tracks"]):
-            if i < 3 and not track["uri"] in relatedArtists:
-                relatedArtists.append(track["uri"])
+            if i < 2 and not track["uri"] in relatedArtists:
+                try:
+                    relatedArtists.append(track["uri"])
+                except:
+                    continue
     return relatedArtists

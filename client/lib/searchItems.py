@@ -17,7 +17,7 @@ def getSearchQuery(searchList):
 def by(token, type, searchList):
     queryParams = rootParams.copy()
     res = []
-    for i in xrange(20):
+    for i in xrange(4):
         queryParams["params"]["q"] = getSearchQuery(searchList)
         queryParams["params"]["type"] = type
         queryParams["endpoint"] = "/search"
@@ -26,5 +26,8 @@ def by(token, type, searchList):
         response = requests.get(url=query["url"], headers=query["header"])
         responseJson = json.loads(response.text)
         if str(type + "s") in responseJson:
-            res.append(random.choice(responseJson["artists"]["items"]))
+            try:
+                res.append(random.choice(responseJson["artists"]["items"]))
+            except:
+                continue
     return res
