@@ -1,8 +1,7 @@
 from lib import searchItems, filterItems, artists
 
-def find(accessToken, topArtists):
-    filteredGenres = filterItems.genres(topArtists["items"])
-    randRelatedArtists = searchItems.by(accessToken, "artist", filteredGenres)
+def find(accessToken, topGenres):
+    randRelatedArtists = searchItems.by(accessToken, "artist", topGenres)
     topTracks = []
     for artist in randRelatedArtists:
         topArtistTracks = artists.topTracks(accessToken, artist["id"])

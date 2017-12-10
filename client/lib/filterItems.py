@@ -13,3 +13,10 @@ def tracks(items):
         if not item["id"] in filteredTracks:
             filteredTracks.append(item["id"])
     return filteredTracks
+
+def artists(items):
+    filteredArtists = []
+    for item in items:
+        if not item["id"] in filteredArtists:
+            filteredArtists.append(item["id"])
+    return filteredArtists
