@@ -16,7 +16,7 @@ Note: it's necessary that you set `user-top-read user-read-recently-played playl
 curl -X GET "https://api.spotify.com/v1/me/playlists" -H "Authorization: Bearer {your access token}"
 ```
 
-5. create a .env file in the /client directory:
+5. create a .env file in the root directory:
 ```
 REFRESH_TOKEN = "your refresh token"
 CLIENT_ID = "your client id token"
@@ -25,4 +25,6 @@ PLAYLIST_ID = "the playlist id of 'mydailymix'"
 USER_ID = "should be your user name"
 ```
 ## Usage
-Run the recommender with `python main.py` inside the /client directory.
+Run the recommender with `python main.py` from the root directory.
+
+To configure **MyDailyMix** you can edit the `config.json`.
