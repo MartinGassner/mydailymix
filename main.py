@@ -37,6 +37,6 @@ if __name__ == '__main__':
             recommender = config["recommender"]["randTopRelatedArtists"]
             tracks += randTopRelatedArtists.find(accessToken, topFilteredGenres, recommender["numRequests"])
         random.shuffle(tracks)
-    # playlist.replaceTracks(accessToken, tracks)
+    playlist.replaceTracks(accessToken, tracks)
     print "Your playlist is ready!"
     print("Execution took %s seconds" % (time.time() - start_time))
