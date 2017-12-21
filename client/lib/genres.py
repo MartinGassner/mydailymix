@@ -7,24 +7,6 @@ rootParams = {
     "token": None
 }
 
-excludedGenres = [
-    "reading",
-    "hoerspiel",
-    "motivation",
-    "poetry",
-    "prank",
-    "kabarett",
-    "drama",
-    "oratory",
-    "spoken word",
-    "kindermusik",
-    "guidance",
-    "deep comedy",
-    "comedy",
-    "comic",
-    "christmas"
-]
-
 def getGenreWhitelist(token):
     queryParams = rootParams.copy()
     queryParams["token"] = token
@@ -33,23 +15,22 @@ def getGenreWhitelist(token):
     res = requests.get(url=query["url"], headers=query["header"])
     return json.loads(res.text)
 
-def getTopWhiteGenres(topArtists, whiteListGenres):
-    topWhiteListGernres = []
-    filteredGenres = filterItems.genres(topArtists["items"])
-    for whiteListGenre in whiteListGenres["genres"]:
-        if whiteListGenre in filteredGenres and not whiteListGenre in excludedGenres:
+def getTopGenreSeeds(filteredGenres, genreSeeds):
+    topGenreSeeds = []
+    for genreSeed in genreSeeds["genres"]:
+        if genreSeed in filteredGenres:
             try:
-                topWhiteListGernres.append(whiteListGenre)
+                topGenreSeeds.append(genreSeed)
             except:
                 continue
-    return topWhiteListGernres
+    return topGenreSeeds
 
-def getTopFilteredGenres(topArtists, whiteListGenres):
-    filteredGenres = filterItems.genres(topArtists["items"])
+def getTopFilteredGenres(filteredGenres, genreSeeds):
+    topFilteredGenres = []
     for filteredGenre in filteredGenres:
-        if filteredGenre in whiteListGenres["genres"] and filteredGenre in excludedGenres:
+        if not filteredGenre in genreSeeds["genres"]:
             try:
-                filteredGenres.remove(filteredGenre)
+                topFilteredGenres.append(filteredGenre)
             except:
                 continue
-    return filteredGenres
+    return topFilteredGenres

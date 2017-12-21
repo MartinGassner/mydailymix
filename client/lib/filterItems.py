@@ -1,31 +1,14 @@
-excludedGenres = [
-    "reading",
-    "hoerspiel",
-    "motivation",
-    "poetry",
-    "prank",
-    "kabarett",
-    "drama",
-    "oratory",
-    "spoken word",
-    "kindermusik",
-    "guidance",
-    "deep comedy",
-    "comedy",
-    "comic",
-    "christmas"
-]
-
-
-def genres(items):
+def genres(items, excludedGenres):
     filteredGenres = []
     for item in items:
         for genre in item["genres"]:
-            if not genre in filteredGenres and not genre in excludedGenres:
-                try:
-                    filteredGenres.append(genre)
-                except:
-                    continue
+            if len(list(set(genre.split()).intersection(excludedGenres))) == 0:
+                genre = genre.replace(' ', '-').lower()
+                if not genre in filteredGenres:
+                    try:
+                        filteredGenres.append(genre)
+                    except:
+                        continue
     return filteredGenres
 
 

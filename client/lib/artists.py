@@ -35,19 +35,19 @@ def getRandGenres(topWhiteListGenres):
     return seedGenres
 
 
-def getRelated(token, topArtists, topWhiteListGenres):
+def getRelated(token, topArtists, topWhiteListGenres, numReq, numTrPerReq):
     queryParams = rootParams.copy()
     queryParams["token"] = token
     queryParams["endpoint"] = "/recommendations"
     relatedArtists = []
-    for i in xrange(4):
+    for i in xrange(numReq):
         queryParams["params"]["seed_artists"] = getRandArtists(topArtists)
         queryParams["params"]["seed_genres"] = getRandGenres(topWhiteListGenres)
         query = buildQuery(queryParams)
         res = requests.get(url=query["url"], headers=query["header"])
         resJson = json.loads(res.text)
         for i, track in enumerate(resJson["tracks"]):
-            if i < 2 and not track["uri"] in relatedArtists:
+            if i < numTrPerReq and not track["uri"] in relatedArtists:
                 try:
                     relatedArtists.append(track["uri"])
                 except:

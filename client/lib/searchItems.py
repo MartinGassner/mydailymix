@@ -14,10 +14,10 @@ rootParams = {
 def getSearchQuery(searchList):
     return ('genre:"' + random.choice(searchList) + '"')
 
-def by(token, type, searchList):
+def by(token, type, searchList, numReq):
     queryParams = rootParams.copy()
     res = []
-    for i in xrange(4):
+    for i in xrange(numReq):
         queryParams["params"]["q"] = getSearchQuery(searchList)
         queryParams["params"]["type"] = type
         queryParams["endpoint"] = "/search"

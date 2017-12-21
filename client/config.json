@@ -1,0 +1,40 @@
+{
+  "timeRanges": {
+    "short_term": true,
+    "medium_term": true,
+    "long_term": true
+  },
+  "recommender": {
+    "browseRelatedArtists": {
+      "status": true,
+      "numRequests": 4,
+      "numTracksPerRequest": 2
+    },
+    "browseRelatedTracks": {
+      "status": true,
+      "numRequests": 4,
+      "numTracksPerRequest": 2
+    },
+    "randTopRelatedArtists": {
+      "status": true,
+      "numRequests": 4
+    }
+  },
+  "excludedGenres": [
+    "reading",
+    "hoerspiel",
+    "motivation",
+    "poetry",
+    "prank",
+    "kabarett",
+    "drama",
+    "oratory",
+    "spoken word",
+    "kindermusik",
+    "guidance",
+    "deep comedy",
+    "comedy",
+    "comic",
+    "christmas"
+  ]
+}
