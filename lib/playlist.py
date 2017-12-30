@@ -1,8 +1,8 @@
-import requests, json
+import requests, json, os
 from dotenv import Dotenv
 from utils import buildQuery
 
-dotenv = Dotenv('.env')
+dotenv = Dotenv(os.path.join(os.path.dirname(__file__), '../.env'))
 playlistID = dotenv['PLAYLIST_ID']
 userID = dotenv['USER_ID']
 

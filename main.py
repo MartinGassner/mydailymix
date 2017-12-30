@@ -1,10 +1,9 @@
-import random, time, json
+import random, time, json, os
 from lib import token, playlist, favorites, genres, filterItems
 from recommender import randTopRelatedArtists, browseRelatedTracks, browseRelatedArtists
 
-
 def loadConfig():
-    with open('config.json') as json_file:
+    with open(os.path.join(os.path.dirname(__file__), 'config.json')) as json_file:
         return json.load(json_file)
 
 def getTimeRanges(timeRanges):

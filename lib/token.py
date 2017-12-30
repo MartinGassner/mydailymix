@@ -1,7 +1,7 @@
-import requests, base64, json
+import requests, base64, json, os
 from dotenv import Dotenv
 
-dotenv = Dotenv('.env')
+dotenv = Dotenv(os.path.join(os.path.dirname(__file__), '../.env'))
 refreshToken = dotenv['REFRESH_TOKEN']
 clientID = dotenv['CLIENT_ID']
 clientSecret = dotenv['CLIENT_SECRET']
