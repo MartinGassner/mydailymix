@@ -1,6 +1,6 @@
 from lib import filterItems, artists
 
-def find(accessToken, topArtists, topWhiteListGenres, numReq, numTrPerReq):
-    filteredArtists = filterItems.tracks(topArtists["items"])
-    relatedArtists = artists.getRelated(accessToken, filteredArtists, topWhiteListGenres, numReq, numTrPerReq)
+def find(accessToken, topFilteredArtists, topWhiteListGenres, numReq, numTrPerReq):
+    uniqueArtists = filterItems.tracks(topFilteredArtists)
+    relatedArtists = artists.getRelated(accessToken, uniqueArtists, topWhiteListGenres, numReq, numTrPerReq)
     return relatedArtists
