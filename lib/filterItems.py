@@ -23,12 +23,14 @@ def tracks(items):
     return filteredTracks
 
 
-def artists(items):
+def artists(items, excludedGenres):
     filteredArtists = []
     for item in items:
-        if not item["id"] in filteredArtists:
-            try:
-                filteredArtists.append(item["id"])
-            except:
-                continue
+        for genre in item["genres"]:
+            if len(list(set(genre.split()).intersection(excludedGenres))) == 0:
+                if not item in filteredArtists:
+                    try:
+                        filteredArtists.append(item)
+                    except:
+                        continue
     return filteredArtists
