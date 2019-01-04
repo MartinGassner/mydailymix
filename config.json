@@ -1,27 +1,38 @@
 {
-  "limit": 50,
+  "limit": 40,
+  "maxNumOfTracks": 90,
   "timeRanges": {
     "short_term": true,
     "medium_term": true,
-    "long_term": true
+    "long_term": false
   },
   "recommender": {
     "browseRelatedArtists": {
       "status": true,
-      "numRequests": 4,
-      "numTracksPerRequest": 2
+      "numRequests": 5,
+      "numTracksPerRequest": 10
     },
     "browseRelatedTracks": {
-      "status": true,
-      "numRequests": 4,
+      "status": false,
+      "numRequests": 5,
       "numTracksPerRequest": 2
     },
     "randTopRelatedArtists": {
-      "status": true,
-      "numRequests": 4
+      "status": false,
+      "numRequests": 10
     }
   },
+  "excludeSaved": true,
   "excludedGenres": [
+    "otacore",
+    "deep chiptune",
+    "soundtrack",
+    "scorecore",
+    "video game music",
+    "epicore",
+    "deep soundtrack",
+    "compositional ambient",
+    "world meditation",
     "reading",
     "hoerspiel",
     "motivation",
@@ -39,3 +50,4 @@
     "christmas"
   ]
 }
+

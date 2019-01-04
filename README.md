@@ -9,7 +9,7 @@ The following steps are needed to use this project.
 2. get Client ID and Client Secret by creating a [new application](https://beta.developer.spotify.com/dashboard/)
 3. retrieve a refresh token and a access token by following [this tutorial](https://developer.spotify.com/web-api/tutorial/)
 
-Note: it's necessary that you set `user-top-read user-read-recently-played playlist-modify-private playlist-read-private` as scope.
+Note: it's necessary that you set `user-top-read user-read-recently-played playlist-modify-private playlist-read-private user-library-read` as scope.
 
 4. create a playlist called "mydailymix" and query its ID 
 ```

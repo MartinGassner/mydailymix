@@ -1,5 +1,5 @@
-import random, time, json, os
-from lib import token, playlist, favorites, genres, filterItems
+import random, time, json, os, requests
+from lib import token, playlist, favorites, genres, filterItems, saved
 from recommender import randTopRelatedArtists, browseRelatedTracks, browseRelatedArtists
 
 def loadConfig():
@@ -12,6 +12,7 @@ def getTimeRanges(timeRanges):
         if trv == True:
             trs.append(tr)
     return trs
+
 
 if __name__ == '__main__':
     start_time = time.time()
@@ -38,6 +39,10 @@ if __name__ == '__main__':
             recommender = config["recommender"]["randTopRelatedArtists"]
             tracks += randTopRelatedArtists.find(accessToken, topFilteredGenres, recommender["numRequests"])
         random.shuffle(tracks)
+    if config["excludeSaved"]:
+        tracks = saved.getUnsaved(accessToken, tracks)
+    if len(tracks) > config["maxNumOfTracks"]:
+        tracks = tracks[0:config["maxNumOfTracks"]-1]
     playlist.replaceTracks(accessToken, tracks)
     print "Your playlist is ready!"
     print("Execution took %s seconds" % (time.time() - start_time))
