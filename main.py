@@ -1,4 +1,4 @@
-import random, time, json, os, requests
+import random, time, json, os
 from lib import token, playlist, favorites, genres, filterItems, saved
 from recommender import randTopRelatedArtists, browseRelatedTracks, browseRelatedArtists
 
@@ -9,7 +9,7 @@ def loadConfig():
 def getTimeRanges(timeRanges):
     trs = []
     for tr, trv in timeRanges.iteritems():
-        if trv == True:
+        if trv is True:
             trs.append(tr)
     return trs
 
@@ -29,13 +29,13 @@ if __name__ == '__main__':
         filteredGenres = filterItems.genres(topArtists["items"], config["excludedGenres"])
         topFilteredGenres = genres.getTopFilteredGenres(filteredGenres, genreSeeds)
         topGenreSeeds = genres.getTopGenreSeeds(filteredGenres, genreSeeds)
-        if config["recommender"]["browseRelatedArtists"]["status"] == True:
+        if config["recommender"]["browseRelatedArtists"]["status"] and len(topFilteredArtists) and len(topGenreSeeds):
             recommender = config["recommender"]["browseRelatedArtists"]
             tracks += browseRelatedArtists.find(accessToken, topFilteredArtists, topGenreSeeds, recommender["numRequests"], recommender["numTracksPerRequest"])
-        if config["recommender"]["browseRelatedTracks"]["status"] == True:
+        if config["recommender"]["browseRelatedTracks"]["status"] and len(topTracks):
             recommender = config["recommender"]["browseRelatedTracks"]
             tracks += browseRelatedTracks.find(accessToken, topTracks, recommender["numRequests"], recommender["numTracksPerRequest"])
-        if config["recommender"]["randTopRelatedArtists"]["status"] == True:
+        if config["recommender"]["randTopRelatedArtists"]["status"] and len(topFilteredGenres):
             recommender = config["recommender"]["randTopRelatedArtists"]
             tracks += randTopRelatedArtists.find(accessToken, topFilteredGenres, recommender["numRequests"])
         random.shuffle(tracks)

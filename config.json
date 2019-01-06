@@ -4,7 +4,7 @@
   "timeRanges": {
     "short_term": true,
     "medium_term": true,
-    "long_term": false
+    "long_term": true
   },
   "recommender": {
     "browseRelatedArtists": {
@@ -13,12 +13,12 @@
       "numTracksPerRequest": 10
     },
     "browseRelatedTracks": {
-      "status": false,
+      "status": true,
       "numRequests": 5,
       "numTracksPerRequest": 2
     },
     "randTopRelatedArtists": {
-      "status": false,
+      "status": true,
       "numRequests": 10
     }
   },
